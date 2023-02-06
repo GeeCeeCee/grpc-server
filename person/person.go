@@ -1,16 +1,18 @@
-package person
+package persons
 
 import (
 	"log"
 
-	"golang.org/x/net/context"
+	"github.com/GeeCeeCee/grpc-proto/person"
+	"golang.org/x/net/context" // indirect
 )
 
 type Server struct {
-	UnimplementedSayHelloServiceServer
+	person.UnimplementedSayHelloServiceServer
 }
 
-func (s *Server) SayHello(ctx context.Context, in *Message) (*Message, error) {
+func (s *Server) SayHello(ctx context.Context, in *person.Message) (*person.Message, error) {
+	
 	log.Printf("Receive message body from client: %s", in.Body)
-	return &Message{Body: "Hello From the Server!"}, nil
+	return &person.Message{Body: "Hello From the Server!"}, nil
 }
